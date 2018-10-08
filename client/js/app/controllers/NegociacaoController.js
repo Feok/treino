@@ -12,19 +12,22 @@ class NegociacaoController {
     adiciona(event) {
         
         event.preventDefault();
+        
+        this._listaNegociacoes.adiciona(this._criaNegociacao());
+        this._limpaFormulario();        
 
-        let negociacao = new Negociacao(
-            DateHelper.textoParaData(this._inputData.value),
-            this._inputQuantidade.value,
-            this._inputValor.value  
-        );
-        
-        this._listaNegociacoes.adiciona(negociacao);
-        this._limpaFormulario();
-        
+        this._listaNegociacoes.negociacoes.length = 0;
+
         console.log(this._listaNegociacoes.negociacoes);
     }
 
+    _criaNegociacao() {
+
+        return new Negociacao(
+            DateHelper.textoParaData(this._inputData.value),
+            this._inputQuantidade.value,
+            this._inputValor.value);
+    }
     _limpaFormulario() {
 
         this._inputData.value = "";
